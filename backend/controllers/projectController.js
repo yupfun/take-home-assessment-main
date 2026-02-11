@@ -1,11 +1,27 @@
 const { getProjects, getProjectById, addProject } = require('../config/store');
+const { VALID_STATUSES } = require('../middleware/validateRequest');
 
 /**
  * List all projects.
  */
 function listProjects(req, res, next) {
   try {
-    const projects = getProjects();
+    const { status } = req.query;
+    let projects = getProjects();
+
+    if (status) {
+      const normalized = String(status).toLowerCase();
+      if (!VALID_STATUSES.includes(normalized)) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid status filter',
+          details: [`status must be one of: ${VALID_STATUSES.join(', ')}`],
+        });
+      }
+
+      projects = projects.filter((p) => String(p.status).toLowerCase() === normalized);
+    }
+
     res.json({ success: true, data: projects, count: projects.length });
   } catch (err) {
     next(err);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserProvider } from 'ethers';
+import Transactions from './Transactions';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 
@@ -14,6 +15,7 @@ function Projects() {
   const [error, setError] = useState(null);
   const [address, setAddress] = useState(null);
   const [walletError, setWalletError] = useState(null);
+  const [statusFilter, setStatusFilter] = useState('all');
 
   useEffect(() => {
     let cancelled = false;
@@ -21,7 +23,8 @@ function Projects() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`${API_BASE}/projects`);
+        const qs = statusFilter && statusFilter !== 'all' ? `?status=${encodeURIComponent(statusFilter)}` : '';
+        const res = await fetch(`${API_BASE}/projects${qs}`);
         if (!res.ok) throw new Error(`Failed to load projects: ${res.status}`);
         const json = await res.json();
         if (!cancelled && json.data) setProjects(json.data);
@@ -33,7 +36,7 @@ function Projects() {
     }
     fetchProjects();
     return () => { cancelled = true; };
-  }, []);
+  }, [statusFilter]);
 
   async function connectWallet() {
     setWalletError(null);
@@ -55,7 +58,10 @@ function Projects() {
   if (loading) {
     return (
       <section className="projects-section">
-        <p className="projects-loading">Loading projects…</p>
+        <div className="loading-row">
+          <span className="spinner" aria-label="Loading" />
+          <span className="projects-loading">Loading projects…</span>
+        </div>
       </section>
     );
   }
@@ -72,6 +78,22 @@ function Projects() {
     <section className="projects-section">
       <div className="projects-header">
         <h2>Projects</h2>
+
+        <div className="filter-row">
+          <label className="filter-label" htmlFor="statusFilter">Status</label>
+          <select
+            id="statusFilter"
+            className="filter-select"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="all">All</option>
+            <option value="active">active</option>
+            <option value="in-progress">in-progress</option>
+            <option value="archived">archived</option>
+          </select>
+        </div>
+
         <div className="wallet-row">
           {address ? (
             <span className="wallet-address" title={address}>
@@ -96,6 +118,8 @@ function Projects() {
           </li>
         ))}
       </ul>
+
+      <Transactions address={address} />
     </section>
   );
 }

