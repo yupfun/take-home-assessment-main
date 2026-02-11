@@ -1,0 +1,130 @@
+.App {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.App-header {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.App-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.App-header p {
+  color: #666;
+}
+
+/* Projects section */
+.projects-section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.projects-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.projects-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.wallet-row {
+  margin-left: auto;
+}
+
+.connect-wallet-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  background: #1a1a2e;
+  color: #eee;
+  border: 1px solid #444;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.connect-wallet-btn:hover {
+  background: #252540;
+  border-color: #666;
+}
+
+.wallet-address {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9rem;
+  color: #0a0;
+  background: #0a0a0a;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+}
+
+.wallet-error,
+.projects-error {
+  width: 100%;
+  margin: 0.5rem 0 0;
+  color: #c00;
+  font-size: 0.9rem;
+}
+
+.projects-loading {
+  color: #666;
+  margin: 1rem 0;
+}
+
+.projects-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.project-name {
+  font-weight: 600;
+}
+
+.project-chain {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.project-status {
+  font-size: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: #e9ecef;
+  color: #333;
+}
+
+.project-status--active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.project-status--in-progress {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.project-status--archived {
+  background: #f8d7da;
+  color: #721c24;
+}
